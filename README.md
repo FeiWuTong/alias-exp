@@ -40,6 +40,12 @@ alias-exp
 --> native
 --> env
 ------> tc.sh
+------> ...
+--> txdata
+------> maketx.js
+------> ...
+------> sm_transfer1.json
+--> ...
 
 exp
 --> alias
@@ -69,7 +75,7 @@ log[ip-suffix]
 --> ...
 ```
 
-其中`alias-exp`内装有两个版本的，基于amd 3700X的cpu编译的geth，分别在`alias`和`native`目录下。这两个目录下的geth可以自行编译替换。而`env`目录下是跑私有链的全节点网络所用的必要脚本。
+其中`alias-exp`内装有两个版本的，基于amd 3700X的cpu编译的geth，分别在`alias`和`native`目录下。这两个目录下的geth可以自行编译替换。而`env`目录下是跑私有链的全节点网络所用的必要脚本。另外log目录是后续每台机器留存日志输出的，一开始并不存在，且最后可以用一个总的log目录包含所有的log[ip]目录。
 
 ## 脚本功能
 
