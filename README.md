@@ -83,7 +83,7 @@ geth环境搭建与运行：
 
 * init：构建geth运行的前置环境。即tx maker的生成，并根据tx maker的address对创世块作相应的修改。
 * specialrun：对特定节点的启动脚本增添特定参数。包括tx maker和nat节点。
-* make：根据设定参数生成节点的启动脚本。
+* make：根据设定参数生成节点的启动脚本。可以根据需求在生成geth的参数后面加`--targetgaslimit`。
 * cluster：为同步用全节点生成集群。
 * node：完整配置一个节点的运行环境。主要对象为full节点、miner节点与nat节点。其中full节点的流程为创世块初始化链，通过make生成运行脚本。miner节点在fullnode之上会创建账户用于coinbase。nat节点在fullnode之上则通过specialrun添加nat参数，并运行脚本获取生成enr信息。
 * run：批量运行指定id范围的节点。
@@ -164,8 +164,8 @@ i1[esc]q1yyp[ctrl+A]q98@1
 4. `mv enr enr0`
 5. `bash node.sh nat 3 enr0`
 6. `bash node.sh full 0 enr`
-7. `bash specialrun.sh tx 00`
-8. `bash node.sh miner 1 enr`
+7. `bash specialrun.sh tx 00`，此时可以通过vim查看`genesis.json`和`00.sh`的账户是否一致。
+8. `bash node.sh miner 1 enr`，此时可以插入`ls`查看是否已经成`00~04.sh`。
 9. `bash cluster.sh 4 31 enr`
 10. `bash scp.sh genesis.json`
 11. `bash scp.sh enr0`，步骤10和11都是将其他机器所需的**更新后的创世块**以及**总nat节点的boot信息**用`scp`发送过去。
