@@ -93,7 +93,7 @@ geth环境搭建与运行：
 
 ![fig01](./GethP2P.png)
 
-geth交易的发起和区块信息的采集：
+geth交易的发起和区块信息的采集（使用前需看源码里的部分注释并选定合适的参数）：
 
 * maketx.js：读取json格式的交易数据，通过geth的http（以前名为rpc）接口完成交易的发起。可修改的参数包括：http的port，json交易的文件名，交易的gaslimit。
 * extractBlock.js：通过geth的http接口检索区块的大小，内含交易的数量。可修改的参数包括：http的port，检索的起始与终止区块高度，输出文件名。另外可以额外增加需要检索的字段，具体参考geth中getBlock函数（或者源码的`internal/ethapi/api.go`）给出的block的rpcjson结构。
@@ -199,7 +199,7 @@ net=10.10.9.0/24
 发送交易与收集区块信息（主机器）：
 
 1. `cd web3`
-2. `node maketx.js`或`node extractBlock.js`，注意需要到js脚本中修改相应的参数，包括`port`口，输入/输出文件名，区块范围等。其中输入的文件需要将json格式的交易信息事先准备好。
+2. `node maketx.js`或`node extractBlock.js`，注意需要到js脚本中修改相应的参数，包括`port`口，输入/输出文件名，区块范围等。其中输入的文件需要将json格式的交易信息事先准备好（注意：id后缀的json文件只能在alias-geth中生成交易，在native-geth中会出错，毕竟原版没有id字段）。
 
 拷贝日志（所有机器）：
 
