@@ -85,7 +85,7 @@ geth环境搭建与运行：
 * specialrun：对特定节点的启动脚本增添特定参数。包括tx maker和nat节点。
 * make：根据设定参数生成节点的启动脚本。可以根据需求在生成geth的参数后面加`--targetgaslimit`。
 * cluster：为同步用全节点生成集群。
-* node：完整配置一个节点的运行环境。主要对象为full节点、miner节点与nat节点。其中full节点的流程为创世块初始化链，通过make生成运行脚本。miner节点在fullnode之上会创建账户用于coinbase。nat节点在fullnode之上则通过specialrun添加nat参数，并运行脚本获取生成enr信息。
+* node：完整配置一个节点的运行环境。主要对象为full节点、miner节点与nat节点。其中full节点的流程为创世块初始化链，通过make生成运行脚本。miner节点在fullnode之上会创建账户用于coinbase。nat节点在fullnode之上则通过specialrun添加nat参数，并运行脚本获取生成enr信息。需要注意的是，node脚本中有一行需要自行配置的lan，用于网络发现。
 * run：批量运行指定id范围的节点。
 * scp：发送指定文件到其他ip的机器。注意，目标ip地址写在`ip.txt`文件中（或在脚本中更改参数配置，能修改ip文件名以及目标路径），且发送机与所有接收机都已完成免密登录过程（具体参考expect的脚本仓库）。
 
@@ -144,6 +144,13 @@ i1[esc]q1yyp[ctrl+A]q98@1
 ## 实验步骤
 
 **默认当前工作目录都在/home/[user]下，给出单台机器运行32个节点的例子。**
+
+在传输脚本给所有机器前需要先将`node.sh`脚本中的`lan`配置好（将`10.10.9.0`改为本地子网的前缀，用于网络发现（当然，可以将子网扩展，甚至`0.0.0.0`做全网发现）：
+
+``` bash
+# your lan
+net=10.10.9.0/24
+```
 
 搭建目录树（都是批量操作所有机器）：
 
