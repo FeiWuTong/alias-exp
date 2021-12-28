@@ -30,7 +30,7 @@ fs.readFile(path, function(err, data) {
 			*/
 			var tx = txj.txs[i];
 			tx.from = accounts[tx.from];
-			tx.gas = 110000
+			tx.gas = 100000
 			txhash = eth.sendTransaction(tx);
 			console.log(txhash);
 		}
